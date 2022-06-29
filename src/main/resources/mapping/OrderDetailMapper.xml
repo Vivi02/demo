@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OrderDetailMapper">
+    <select id="findAllDetail" resultType="Order_Detail">
+        select * from order_detail
+    </select>
+    <insert id="insertDetail" parameterType="Order_Detail">
+        insert into order_detail(id,order_no, seq, item_id, price, quantity, unit, remark)
+        values (#{id}, #{order_no}, #{seq}, #{item_id}, #{price}, #{quantity}, #{unit}, #{remark})
+    </insert>
+    <update id="updateItem" parameterType="Order_Detail">
+        update order_detail set order_no=#{order_no}, seq=#{seq}, item_id=#{item_id}, price=#{price}, quantity=#{quantity}, unit=#{unit}, remark=#{remark} where id=#{id}
+    </update>
+    <delete id="deleteDetailById" parameterType="java.lang.String">
+        delete from order_detail where id = #{id}
+    </delete>
+    <select id="findProductById" resultType="Product">
+        select * from product where id=#{id}
+    </select>
+    <select id="findStatusByOrderNo" resultType="java.lang.Integer">
+        select status from order_table where order_no=#{order_no}
+    </select>
+</mapper>

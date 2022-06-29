@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ProductMapper">
+    <select id="findAllProduct" resultType="Product">
+        select * from product
+    </select>
+    <insert id="insertProduct" parameterType="Product">
+        insert into product(id,code,name,price, unit,remark,deleted,creator,create_time)
+        values (#{id}, #{code}, #{name}, #{price}, #{unit}, #{remark}, #{deleted}, #{creator}, #{create_time})
+    </insert>
+    <update id="updateProduct" parameterType="Product">
+        update product set code=#{code}, name=#{name}, price=#{price}, unit=#{unit}, remark=#{remark}, deleted=#{deleted}, creator=#{creator}, create_time=#{create_time} where id=#{id}
+    </update>
+    <delete id="deleteProductById" parameterType="java.lang.String">
+        delete from product where id = #{id}
+    </delete>
+    <select id="findOrderProduct" resultType="Product">
+        select product.*, sum(quantity) from product join order_detail
+        where product.id = order_detail.item_id
+        group by id
+        order by quantity
+    </select>
+</mapper>

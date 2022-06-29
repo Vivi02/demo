@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OrderMapper">
+    <select id="findAllOrder" resultType="Order">
+        select * from order_table
+    </select>
+    <insert id="insertOrder" parameterType="Order">
+        insert into order_table(id,biz_date, order_no,status,remark,creator,create_time)
+        values (#{id}, #{biz_date}, #{order_no}, #{status}, #{remark}, #{creator}, #{create_time})
+    </insert>
+    <update id="updateOrder" parameterType="Order">
+        update order_table set biz_date=#{biz_date}, order_no=#{order_no}, status=#{status},  remark=#{remark}, creator=#{creator}, create_time=#{create_time} where id=#{id}
+    </update>
+    <delete id="deleteOrderById" parameterType="java.lang.String">
+        delete from order_table where id = #{id}
+    </delete>
+    <select id="findUserById" resultType="User">
+        select * from user where id=#{id}
+    </select>
+    <update id="updateStatus" parameterType="Order">
+        update order_table set status=#{status} where id=#{id}
+    </update>
+    <select id="findStatusById" resultType="java.lang.Integer">
+        select status from order_table where id=#{id}
+    </select>
+</mapper>
